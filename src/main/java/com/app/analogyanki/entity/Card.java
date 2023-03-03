@@ -20,7 +20,7 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_id")
+    @Column(name = "id")
     private Long id;
     private String frontOfCard;
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)

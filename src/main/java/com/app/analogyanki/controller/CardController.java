@@ -25,9 +25,10 @@ public class CardController {
 
     /*
         TODO вернуть карты на повторение +
-        TODO получить карты по 1 слову в предложении(не важно где) (после Stepik)
-        TODO получить sentence LIKE pattern "sentence" (слово в слово) (после Stepik)
-        TODO удалить по ID
+        TODO получить карты по 1 слову в предложении(не важно где) (после Stepik) +
+        TODO получить sentence LIKE pattern "sentence" (слово в слово) (после Stepik) +
+        TODO удалить по ID card +
+        TODO удалить по word из card
         TODO создать, изменить, удалить КОЛОДЫ - хранить карты в колодах
      */
 
@@ -37,8 +38,18 @@ public class CardController {
         return cardService.getCardsToRepeat();
     }
 
-//    @GetMapping("/{word}")
-//    public CardDto getAllCardsWithSelectedWord(@PathVariable String word) {
-//        return cardService.getAllCardsWithSelectedWord(word);
-//    }
+    @GetMapping("/get_cards_by_word/{word}")
+    public List<CardDto> getCardsByWord(@PathVariable String word) {
+        return cardService.getCardsByWord(word);
+    }
+
+    @GetMapping("/get_cards_by_pattern")
+    public CardDto getCardByPatternSentence(@RequestParam String patternSentence) {
+        return cardService.getCardByPatternSentence(patternSentence);
+    }
+
+    @DeleteMapping("/deleteById/{card_id}")
+    public void deleteByCardId(@PathVariable Long card_id) {
+        cardService.deleteByCardId(card_id);
+    }
 }

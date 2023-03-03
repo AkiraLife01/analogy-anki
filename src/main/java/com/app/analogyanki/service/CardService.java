@@ -46,6 +46,28 @@ public class CardService {
         return cards;
     }
 
+    public List<CardDto> getCardsByWord(String word) {
+        List<Card> cardsByWord = cardRepository.findCardsByWord(word);
+        List<CardDto> cardDtos = new ArrayList<>();
+
+        for (Card card : cardsByWord) {
+            CardDto cardDto = CardMapper.INSTANCE.cardDto(card);
+            cardDtos.add(cardDto);
+        }
+        return cardDtos;
+    }
+
+    public CardDto getCardByPatternSentence(String patternSentence) {
+        var card = cardRepository.findCardsByFrontOfCard(patternSentence);
+        System.out.println(card);
+        return CardMapper.INSTANCE.cardDto(card);
+
+    }
+
+    public void deleteByCardId(Long cardId) {
+        cardRepository.deleteById(cardId);
+    }
+
 //    public CardDto getAllCardsWithSelectedWord(String word) {
 //        cardRepository.
 //    }
