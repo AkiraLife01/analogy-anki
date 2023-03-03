@@ -1,23 +1,28 @@
 package com.app.analogyanki.service;
 
 import com.app.analogyanki.dto.CardDto;
+import com.app.analogyanki.dto.DeleteWordFromCardRequest;
 import com.app.analogyanki.mapper.CardMapper;
 import com.app.analogyanki.entity.Card;
 import com.app.analogyanki.entity.NewWord;
 import com.app.analogyanki.repository.CardRepository;
+import com.app.analogyanki.repository.NewWordRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class CardService {
 
     private final CardRepository cardRepository;
+    private final NewWordRepository newWordRepository;
 
-    public CardService(CardRepository cardRepository) {
+    public CardService(CardRepository cardRepository, NewWordRepository newWordRepository) {
         this.cardRepository = cardRepository;
+        this.newWordRepository = newWordRepository;
     }
 
 
@@ -68,7 +73,36 @@ public class CardService {
         cardRepository.deleteById(cardId);
     }
 
+    public void deleteWordFromCard(DeleteWordFromCardRequest deleteWordFromCardRequest) {
+        newWordRepository.deleteById(deleteWordFromCardRequest.word_id());
+    }
+
 //    public CardDto getAllCardsWithSelectedWord(String word) {
 //        cardRepository.
 //    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        String str1 = "xyaabbbccccdefww";
+        String str2 = "xxxxyyyyabklmopq";
+
+        String string = str1 + str2;
+
+        List<Character> characters = new ArrayList<>();
+
+        for (int i = 0; i < string.length(); i++) {
+            if (i == 0) {
+                characters.add(string.charAt(i));
+            }
+
+            if (!characters.contains(string.charAt(i))) {
+                characters.add(string.charAt(i));
+            }
+        }
+
+        String result = Arrays.toString(Arrays.stream(characters.toArray()).sorted().toArray());
+
+        System.out.println(result);
+    }
 }

@@ -1,6 +1,7 @@
 package com.app.analogyanki.controller;
 
 import com.app.analogyanki.dto.CardDto;
+import com.app.analogyanki.dto.DeleteWordFromCardRequest;
 import com.app.analogyanki.entity.Card;
 import com.app.analogyanki.service.CardService;
 import org.springframework.lang.NonNull;
@@ -28,10 +29,16 @@ public class CardController {
         TODO получить карты по 1 слову в предложении(не важно где) (после Stepik) +
         TODO получить sentence LIKE pattern "sentence" (слово в слово) (после Stepik) +
         TODO удалить по ID card +
-        TODO удалить по word из card
+        TODO удалить по word из card +
+        TODO добавить слово к существующей card
         TODO создать, изменить, удалить КОЛОДЫ - хранить карты в колодах
+        TODO перенести логику в NewWord Controller (вся работа с словами отдельная тема)
      */
 
+    @DeleteMapping("delete_word_from_card")
+    public void deleteWordFromCard(@RequestBody DeleteWordFromCardRequest deleteWordFromCardRequest) {
+        cardService.deleteWordFromCard(deleteWordFromCardRequest);
+    }
 
     @GetMapping("/cards_to_repeat")
     public List<CardDto> getCardsToRepeat() {
